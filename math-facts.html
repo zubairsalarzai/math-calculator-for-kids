@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script>
+
+  </script>
+
+  <title>Play2Learn-About Us</title>
+</head>
+
+<body>
+
+
+  <header>
+    <span>Play2Learn Logo</span>
+    <nav>
+      <div id="navli">
+        <a href="Class Project Home.html">Home |</a>
+
+        <div class="dropdown">
+          <button class="dropbtn">Games |</button>
+          <div class="dropdown-content">
+            <a href="math-facts.html">Math Facts</a>
+            <a href="anagram-hunt.html">Anagram Hunt</a>
+          </div>
+          <a href="Class Project-About Us.html">About |</a>
+          <a href="Login.html"> Login</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+
+    <section id="flexparent">
+      <div id=contactus class="flexchild">
+        <div class="mathfactshead">Math Facts Practice</div>
+
+      </div>
+    </section>
+    <section id="firstStep">
+      <!-- <form onsubmit="return false;"> -->
+      <select id="mathList">
+        <!-- <option> ---Choose Mathmatic Type--- </option> -->
+        <option value="+"> Addition </option>
+        <option value="-"> Subtraction </option>
+        <option value="x"> Multiplication </option>
+        <option value="/"> Division </option>
+      </select>
+
+      <button class="go" onclick="calculator();">Go!</button>
+      <!-- </form> -->
+      <div id="instr">
+        1.Select Operation
+        <br>
+        2. Press Go!
+        <br>
+        3. How many problems can you solve in 30 seconds?
+      </div>
+    </section>
+    <section id="secondStep">
+      <h4 id="calHeader">addition</h4>
+      <div class="container">
+        <span class="calc-screen">
+          <span id="firstOperand">5</span>
+          <span id="operator">+</span>
+          <span id="secondOperand">8</span>
+        </span>
+        <div class="calInput">
+          <input type="text" id="answer" name="answer" onblur="this.focus()" autofocus />
+        </div>
+        <div class="calc-body">
+
+
+          <div class="calc-button-row">
+            <div class="button" onclick="buttonValue('7')">7</div>
+            <div class="button" onclick="buttonValue('8')">8</div>
+            <div class="button" onclick="buttonValue('9')">9</div>
+
+          </div>
+          <div class="calc-button-row">
+            <div class="button" onclick="buttonValue('4')">4</div>
+            <div class="button" onclick="buttonValue('5')">5</div>
+            <div class="button" onclick="buttonValue('6')">6</div>
+
+          </div>
+          <div class="calc-button-row">
+            <div class="button" onclick="buttonValue('1')">1</div>
+            <div class="button" onclick="buttonValue('2')">2</div>
+            <div class="button" onclick="buttonValue('3')">3</div>
+
+          </div>
+          <div class="calc-button-row">
+
+
+            <div class="button btnClear" onclick="buttonClear()">clear</div>
+            <div class="button btnZero" onclick="buttonValue('0')">0</div>
+          </div>
+          <div class="calc-button-row">
+
+
+
+            <div class="button " onclick="submitAnswer();">submit</div>
+          </div>
+        </div>
+        <div>
+          <p class="pScore">Score:<span id="score">0</span></p>
+        </div>
+        <div class="time">
+          <p class="pScore">Time Left: <span id="timer"></span></p>
+        </div>
+      </div>
+    </section>
+    <section id="thirdStep">
+      <h2 id="calHeader3">addition</h1>
+        <span id="timeUp">Times Up!</span>
+        <p class="pScore">Your final score is:</p>
+        <span id="result">43</span><br>
+        <button class="button tryAgainBtn" onclick="tryAgainBtn();">Try Again</button>
+    </section>
+  </main>
+  <footer>
+    <div class="foot-copy">
+      <p>&copy;2020 Play 2Learn</p>
+    </div>
+    <section id="mediabuttons">
+      <a href="#" class="fa fa-envelope"></a>
+      <a href="#" class="fa fa-instagram"></a>
+      <a href="#" class="fa fa-twitter"></a>
+      <a href="#" class="fa fa-facebook"></a>
+    </section>
+  </footer>
+  <script type="text/javascript">
+
+    var operator;
+    var answer;
+    function calculator() {
+      document.getElementById('firstStep').style.display = 'none';
+      document.getElementById('secondStep').style.display = 'block';
+      document.getElementById("calHeader").innerHTML = document.getElementById('mathList').options[document.getElementById('mathList').selectedIndex].innerHTML;
+      document.getElementById("calHeader3").innerHTML = document.getElementById('mathList').options[document.getElementById('mathList').selectedIndex].innerHTML;
+      document.getElementById("answer").focus();
+      operator = document.getElementById("mathList").value;
+      document.getElementById("operator").innerHTML = operator;
+      questionGenerator()
+      timer()
+
+    }
+
+    function questionGenerator() {
+      if (document.getElementById("operator").innerHTML === "+") {
+        var x1 = Math.floor(Math.random() * 100);
+        document.getElementById("firstOperand").innerHTML = x1;
+        var x2 = Math.floor(Math.random() * 100);
+        document.getElementById("secondOperand").innerHTML = x2;
+        answer = parseInt(x1) + parseInt(x2);
+      }
+      if (document.getElementById("operator").innerHTML === "-") {
+        var x1 = Math.floor(Math.random() * 100);
+        var x2 = Math.floor(Math.random() * 100);
+        if (x1 >= x2) {
+          document.getElementById("firstOperand").innerHTML = x1;
+          document.getElementById("secondOperand").innerHTML = x2;
+          answer = parseInt(x1) - parseInt(x2);
+        } else {
+          document.getElementById("firstOperand").innerHTML = x2;
+          document.getElementById("secondOperand").innerHTML = x1;
+          answer = parseInt(x2) - parseInt(x1);
+        }
+
+      }
+      if (document.getElementById("operator").innerHTML === "x") {
+        var x1 = Math.floor(Math.random() * 100);
+        document.getElementById("firstOperand").innerHTML = x1;
+        var x2 = Math.floor(Math.random() * 100);
+        document.getElementById("secondOperand").innerHTML = x2;
+        answer = parseInt(x1) * parseInt(x2);
+      }
+      if (document.getElementById("operator").innerHTML === "/") {
+        var x1 = Math.floor(Math.random() * 100);
+        var x2 = Math.floor(Math.random() * 10);
+        var tempAnswer = x1 * x2;
+        answer = x1;
+        document.getElementById("firstOperand").innerHTML = tempAnswer;
+        document.getElementById("secondOperand").innerHTML = x2;
+      }
+    }
+    function buttonValue(val) {
+      document.getElementById('answer').value = (document.getElementById('answer').value).concat(val)
+    }
+    function buttonClear() {
+      document.getElementById('answer').value = " "
+    }
+    function timer() {
+      let time_limit = 30;
+
+      let time_out = setInterval(() => {
+
+        if (time_limit == 0) {
+
+          document.getElementById("timer").innerHTML = 'Time Over';
+
+          document.getElementById('secondStep').style.display = 'none';
+          document.getElementById('thirdStep').style.display = 'block';
+          document.getElementById('answer').value = ""
+          document.getElementById('result').innerHTML = document.getElementById('score').innerHTML;
+          clearInterval(time_out)
+        } else {
+
+          if (time_limit < 10) {
+            time_limit = 0 + '' + time_limit;
+          }
+
+          document.getElementById("timer").innerHTML = '00:' + time_limit;
+
+          time_limit -= 1;
+
+        }
+
+      }, 1000);
+
+    }
+    function submitAnswer() {
+      if (parseInt(document.getElementById('answer').value) === answer) {
+        var val = document.getElementById('score').innerHTML
+        document.getElementById('score').innerHTML = parseInt(val) + 1;
+      }
+      document.getElementById('answer').value = ""
+      questionGenerator()
+    }
+    function tryAgainBtn() {
+      document.getElementById('thirdStep').style.display = 'none';
+      document.getElementById('firstStep').style.display = 'block';
+    }
+
+  </script>
+</body>
+
+</html>
